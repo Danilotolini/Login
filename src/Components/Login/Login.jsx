@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { FaUser, FaLock } from "react-icons/fa";
+import { FaUser, FaEye, FaEyeSlash } from "react-icons/fa";
 import "./Login.css";
 
 const Login = () => {
   // Estados para armazenar as entradas do usuário
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // Estado para controlar a visibilidade da senha
 
   // Função que é chamada quando o formulário é enviado
   const handleSubmit = (event) => {
@@ -16,10 +17,15 @@ const Login = () => {
     console.log("Dados de Login:", { username, password });
   };
 
+  // Função para alternar a visibilidade da senha
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevState) => !prevState);
+  };
+
   return (
     <div className="container">
       <form onSubmit={handleSubmit}>
-        <h1>Acesse o sistema</h1>
+        <h1>Login</h1>
         <div className="input-field">
           <input
             type="text"
@@ -28,17 +34,19 @@ const Login = () => {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
-          <FaUser className="icon" />
+          <FaUser className="icon email-icon" /> {/* Adiciona a classe email-icon */}
         </div>
         <div className="input-field">
           <input
-            type="password"
+            type={showPassword ? "text" : "password"} // Alterna entre texto e senha
             placeholder="Senha"
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <FaLock className="icon" />
+          <div className="icon eye-icon" onClick={togglePasswordVisibility}>
+            {showPassword ? <FaEyeSlash /> : <FaEye />} {/* Alterna o ícone */}
+          </div>
         </div>
 
         <div className="recall-forget">
@@ -51,7 +59,7 @@ const Login = () => {
         <button type="submit">Login</button>
         <div className="signup-link">
           <p>
-            Não tem uma conta? <a href="#">Registar</a>{" "}
+            Não tem uma conta? <a href="/Cadastro">Registar</a>{" "}
           </p>
         </div>
       </form>
