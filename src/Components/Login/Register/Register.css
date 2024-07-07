@@ -26,13 +26,19 @@
   .input-field input {
     width: 100%;
     height: 100%;
-    background: transparent;
+    background: rgba(255, 255, 255, 0.25); /* Fundo translúcido */
     outline: none;
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3); /* Borda mais visível */
     border-radius: 40px;
     font-size: 16px;
     color: #fff;
-    padding: 0 45px 0 25px;
+    padding: 20px 45px 20px 25px;
+    transition: background 0.3s ease, border 0.3s ease; /* Animação suave */
+  }
+  
+  .input-field input:focus {
+    background: rgba(255, 255, 255, 0.35); /* Fundo ligeiramente mais escuro ao focar */
+    border: 2px solid rgba(255, 255, 255, 0.5); /* Borda mais destacada ao focar */
   }
   
   .input-field input::placeholder {
@@ -63,7 +69,13 @@
     color: #333;
     font-weight: 700;
   }
-  
+  button:hover {
+    box-shadow: 
+      0 0 20px rgba(255, 255, 255, 0.7), /* Sombra branca mais forte */
+      0 0 10px rgba(255, 255, 255, 0.5), /* Segunda camada para mais profundidade */
+      0 0 20px rgba(255, 255, 255, 0.3); /* Terceira camada para um brilho suave */
+    transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out; /* Animação suave */
+  }
   .container .signup-link {
     text-align: center;
     margin-top: 15px;
