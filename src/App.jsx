@@ -1,19 +1,65 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HelmetProvider, Helmet } from 'react-helmet-async';
 import Login from './Components/Login/Login';
-import Register from './Components/Login/Register/Register';  
-import "./App.css";
-
+import Register from './Components/Login/Register/Register';
+import ForgotPassword from './Components/Login/ForgotPassword/ForgotPassword';
+import ResetPassword from './Components/ResetPassword/ResetPassword';
+import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <Router>
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/cadastro" element={<Register />} />
-        </Routes>
-      </Router>
+      <HelmetProvider>
+        <Router>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <>
+                  <Helmet>
+                    <title>Login</title>
+                  </Helmet>
+                  <Login />
+                </>
+              }
+            />
+            <Route
+              path="/cadastro"
+              element={
+                <>
+                  <Helmet>
+                    <title>Cadastro</title>
+                  </Helmet>
+                  <Register />
+                </>
+              }
+            />
+            <Route
+              path="/esqueceu-senha"
+              element={
+                <>
+                  <Helmet>
+                    <title>Esqueceu a Senha</title>
+                  </Helmet>
+                  <ForgotPassword />
+                </>
+              }
+            />
+            <Route
+              path="/redefinir-senha/:token"
+              element={
+                <>
+                  <Helmet>
+                    <title>Redefinir Senha</title>
+                  </Helmet>
+                  <ResetPassword />
+                </>
+              }
+            />
+          </Routes>
+        </Router>
+      </HelmetProvider>
     </div>
   );
 }
