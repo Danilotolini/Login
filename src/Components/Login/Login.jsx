@@ -1,30 +1,54 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaUser, FaEye, FaEyeSlash } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
 import './Login.css';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState('');
+  const [rememberMe, setRememberMe] = useState(false);
 
-  const handleSubmit = (event) => {
+  useEffect(() => {
+    // Verifica se há um usuário lembrado no localStorage ao carregar o componente
+    const rememberedUser = localStorage.getItem('rememberedUser');
+    if (rememberedUser) {
+      setUsername(rememberedUser);
+      setRememberMe(true);
+    }
+  }, []);
+
+  const handleLogin = async (event) => {
     event.preventDefault();
-    console.log('Dados de Login:', { username, password });
+    
+    try {
+      // Lógica de login aqui
+
+      if (rememberMe) {
+        // Se lembrar de mim estiver marcado, você pode armazenar o token ou sessão no localStorage ou cookie
+        localStorage.setItem('rememberedUser', username);
+      } else {
+        localStorage.removeItem('rememberedUser');
+      }
+
+      alert('Login bem-sucedido!');
+    } catch (error) {
+      setError('Usuário ou senha incorretos.');
+    }
   };
 
   const togglePasswordVisibility = () => {
-    setShowPassword((prevState) => !prevState);
+    setShowPassword((prevShowPassword) => !prevShowPassword);
   };
 
   return (
     <div className="container">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleLogin}>
         <h1>Login</h1>
         <div className="input-field">
           <input
             type="text"
-            placeholder="E-mail"
+            placeholder="E-mail ou Nome de Usuário"
             required
             value={username}
             onChange={(e) => setUsername(e.target.value)}
@@ -33,7 +57,7 @@ const Login = () => {
         </div>
         <div className="input-field">
           <input
-            type={showPassword ? "text" : "password"}
+            type={showPassword ? 'text' : 'password'}
             placeholder="Senha"
             required
             value={password}
@@ -43,18 +67,22 @@ const Login = () => {
             {showPassword ? <FaEyeSlash /> : <FaEye />}
           </div>
         </div>
-
+        {error && <p className="error-message">{error}</p>}
         <div className="recall-forget">
           <label>
-            <input type="checkbox" />
-            Lembre de mim
+            <input
+              type="checkbox"
+              checked={rememberMe}
+              onChange={(e) => setRememberMe(e.target.checked)}
+            />
+            Lembrar de mim
           </label>
-          <Link to="/esqueceu-senha">Esqueceu sua senha?</Link>
+          <a href="/esqueceu-senha">Esqueceu sua senha?</a>
         </div>
         <button type="submit">Login</button>
         <div className="signup-link">
           <p>
-            Não tem uma conta? <Link to="/cadastro">Registrar</Link>
+            Não tem uma conta? <a href="/cadastro">Registrar</a>
           </p>
         </div>
       </form>
