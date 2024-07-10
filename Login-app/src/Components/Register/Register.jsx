@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import './Register.css'; // Certifique-se de criar um arquivo CSS correspondente
-import { registerUser } from '../../apiService'; // Importe o serviço de API
 
 const Register = () => {
   const [username, setUsername] = useState('');
@@ -14,18 +13,10 @@ const Register = () => {
     setShowPassword((prevState) => !prevState);
   };
 
-  // Função para lidar com o registro do usuário
-  const handleRegister = async (event) => {
+  const handleRegister = (event) => {
     event.preventDefault();
-    try {
-      const userData = { username, email, password };
-      const response = await registerUser(userData); // Chama a função de registro da API
-      console.log('Usuário cadastrado com sucesso:', response);
-      // Lógica adicional após o sucesso do registro, como redirecionar ou exibir mensagem de sucesso
-    } catch (error) {
-      console.error('Erro ao cadastrar usuário:', error);
-      // Tratar erros de registro, como exibir mensagens de erro para o usuário
-    }
+    console.log('Dados de Registro:', { username, email, password });
+    // Adicione aqui a lógica de registro, como chamadas de API
   };
 
   return (
