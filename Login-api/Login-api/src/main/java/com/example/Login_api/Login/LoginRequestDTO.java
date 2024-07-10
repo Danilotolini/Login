@@ -1,5 +1,3 @@
 package com.example.Login_api.Login;
 
-public class LoginRequestDTO(String email, nome, senha) {
-
-}
+public record LoginRequestDTO(String email, String nome, String senha) { }

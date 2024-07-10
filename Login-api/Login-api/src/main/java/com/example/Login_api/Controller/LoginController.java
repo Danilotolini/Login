@@ -1,7 +1,8 @@
 package com.example.Login_api.Controller;
 
-import com.example.Login_api.Login.Login;
-import com.example.Login_api.Login.LoginRepository;
+import com.example.Login_api.Login.User;
+import com.example.Login_api.Login.UserRepository;
+import com.example.Login_api.Login.LoginRequestDTO;
 import com.example.Login_api.Login.LoginResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,18 +14,16 @@ import java.util.List;
 public class LoginController {
 
     @Autowired
-    private LoginRepository repository;
+    private UserRepository repository;
+
     @PostMapping
     public void saveLogin(@RequestBody LoginRequestDTO data){
-        Login loginData = new Login(data);
-        repository.save(loginData);
-        return;
-
+        User userData = new User(data);
+        repository.save(userData);
     }
+
     @GetMapping
     public List<LoginResponseDTO> getAll(){
-
-        List<LoginResponseDTO> loginList = repository.findAll().stream().map(LoginResponseDTO::new).toList();
-        return loginList;
+        return repository.findAll().stream().map(LoginResponseDTO::new).toList();
     }
 }

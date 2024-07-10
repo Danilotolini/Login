@@ -1,7 +1,6 @@
 package com.example.Login_api.Login;
 
-public class LoginResponseDTO(String email, nome, senha) {
-    public LoginResponseDTO(Login login){
-        this(Login.getEmail(), Login.getNome(), Login.getSenha());
-    }
-}
+public record LoginResponseDTO(String email, String nome, String senha) {
+    public LoginResponseDTO(User user) {
+        this(user.getEmail(), user.getNome(), user.getSenha());
+    } }
