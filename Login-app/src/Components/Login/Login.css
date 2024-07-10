@@ -114,3 +114,25 @@
 .signup-link p a:hover {
   text-decoration: underline;
 }
+/* Login.css */
+/* Login.css */
+.error-message {
+  color: red;
+  margin-top: -10px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-size: 14px;
+  animation: blink-animation 3s infinite;
+}
+
+@keyframes blink-animation {
+  0% {
+    color: red;
+  }
+  50% {
+    color: white;
+  }
+  100% {
+    color: red;
+  }
+}

@@ -2,8 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { HelmetProvider, Helmet } from 'react-helmet-async';
 import Login from './Components/Login/Login';
-import Register from './Components/Login/Register/Register';
-import ForgotPassword from './Components/Login/ForgotPassword/ForgotPassword';
+import Register from './Components/Register/Register';
+import ForgotPassword from './Components/ForgotPassword/ForgotPassword'
 import ResetPassword from './Components/ResetPassword/ResetPassword';
 import './App.css';
 
