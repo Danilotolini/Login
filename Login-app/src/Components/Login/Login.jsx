@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { FaUser, FaEye, FaEyeSlash } from 'react-icons/fa';
-import './Login.css';
+import React, { useState, useEffect } from "react";
+import { FaUser, FaEye, FaEyeSlash } from "react-icons/fa";
+import axios from "axios";
+import "./Login.css";
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -20,9 +21,10 @@ const Login = () => {
 
   const handleLogin = async (event) => {
     event.preventDefault();
-    
+
     try {
-      // Lógica de login aqui
+      const response = await axios.post('/api/login', { email: username, senha: password });
+      console.log(response.data);
 
       if (rememberMe) {
         // Se lembrar de mim estiver marcado, você pode armazenar o token ou sessão no localStorage ou cookie
