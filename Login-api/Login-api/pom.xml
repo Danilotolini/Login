@@ -34,6 +34,7 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
+            <version>42.2.23</version> <!-- Versão mais recente do PostgreSQL -->
             <scope>runtime</scope>
         </dependency>
         <!-- Spring Security -->
@@ -51,13 +52,10 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <version>1.18.22</version> <!-- Versão mais recente do Lombok -->
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>42.2.23</version>
-        </dependency>
+        <!-- JUnit -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -83,7 +81,7 @@
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
-                            <version>1.18.12</version>
+                            <version>1.18.22</version> <!-- Manter a versão consistente -->
                         </path>
                     </annotationProcessorPaths>
                 </configuration>

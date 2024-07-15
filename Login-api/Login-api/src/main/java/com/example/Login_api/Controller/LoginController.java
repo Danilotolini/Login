@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/login")
+@RequestMapping("/api")
 public class LoginController {
 
     private final UserRepository userRepository;
@@ -21,13 +21,14 @@ public class LoginController {
         this.userRepository = userRepository;
     }
 
-    @PostMapping("/save")
-    public void saveLogin(@RequestBody LoginRequestDTO data) {
+    @PostMapping("/register")
+    public String register(@RequestBody LoginRequestDTO data) {
         User user = new User(data.getEmail(), data.getNome(), data.getSenha());
         userRepository.save(user);
+        return "User registered successfully";
     }
 
-    @GetMapping("/getAll")
+    @GetMapping("/users")
     public List<LoginResponseDTO> getAllUsers() {
         List<User> users = userRepository.findAll();
         return users.stream()
