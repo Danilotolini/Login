@@ -1,29 +1,37 @@
 package com.example.Login_api.Controller;
 
+import com.example.Login_api.Login.LoginRequestDTO;
 import com.example.Login_api.Login.User;
 import com.example.Login_api.Login.UserRepository;
-import com.example.Login_api.Login.LoginRequestDTO;
 import com.example.Login_api.Login.LoginResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("login")
+@RequestMapping("/api/login")
 public class LoginController {
 
-    @Autowired
-    private UserRepository repository;
+    private final UserRepository userRepository;
 
-    @PostMapping
-    public void saveLogin(@RequestBody LoginRequestDTO data){
-        User userData = new User(data);
-        repository.save(userData);
+    @Autowired
+    public LoginController(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
-    @GetMapping
-    public List<LoginResponseDTO> getAll(){
-        return repository.findAll().stream().map(LoginResponseDTO::new).toList();
+    @PostMapping("/save")
+    public void saveLogin(@RequestBody LoginRequestDTO data) {
+        User user = new User(data.getEmail(), data.getNome(), data.getSenha());
+        userRepository.save(user);
+    }
+
+    @GetMapping("/getAll")
+    public List<LoginResponseDTO> getAllUsers() {
+        List<User> users = userRepository.findAll();
+        return users.stream()
+                .map(LoginResponseDTO::new)
+                .collect(Collectors.toList());
     }
 }

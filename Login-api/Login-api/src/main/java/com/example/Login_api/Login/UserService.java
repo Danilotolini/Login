@@ -1,24 +1,25 @@
 package com.example.Login_api.Login;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    public UserService(BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    }
 
-    public User save(User user) {
+    public void save(User user) {
+        // Criptografar a senha antes de salvar
         user.setSenha(bCryptPasswordEncoder.encode(user.getSenha()));
-        return userRepository.save(user);
+        // Aqui você faria a lógica para salvar o usuário no banco de dados, por exemplo:
+        // userRepository.save(user);
     }
 
-    public User findByEmail(String email) {
-        return userRepository.findByEmail(email);
-    }
+    // Outros métodos do serviço
 }
